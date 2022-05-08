@@ -1,0 +1,7 @@
+package ${basePackage}.repository;
+
+import ${basePackage}.model.${objectPackage};
+import org.springframework.data.repository.CrudRepository;
+
+public interface ${objectName}Repository extends CrudRepository<${objectName}, Long> {
+}

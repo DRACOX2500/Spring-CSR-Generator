@@ -1,0 +1,33 @@
+package ${basePackage}.service;
+
+import ${basePackage}.model.${objectPackage};
+import ${basePackage}.repository.${objectPackage}Repository;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Data
+@Service
+public class ${objectName}Service {
+
+    @Autowired
+    private ${objectName}Repository ${lowerObjectName}Repository;
+
+    public Optional<Project> get${objectName}ById(Long id) {
+        return ${lowerObjectName}Repository.findById(id);
+    }
+
+    public Iterable<Project> get${objectName}s() {
+        return ${lowerObjectName}Repository.findAll();
+    }
+
+    public void delete${objectName}ById(Long id) {
+        ${lowerObjectName}Repository.deleteById(id);
+    }
+
+    public Project saved${objectName}(${objectName} ${lowerObjectName}) {
+        return ${lowerObjectName}Repository.save(${lowerObjectName});
+    }
+}

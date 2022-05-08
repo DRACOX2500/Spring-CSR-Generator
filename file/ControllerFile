@@ -1,0 +1,15 @@
+package ${basePackage}.controller;
+
+import ${basePackage}.model.${objectPackage};
+import ${basePackage}.service.${objectPackage}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ${objectName}Controller {
+
+    @Autowired
+    private ${objectName}Service ${lowerObjectName}Service;
+
+
+}
