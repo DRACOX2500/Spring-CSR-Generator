@@ -1,4 +1,4 @@
-package ${basePackage}.controller;
+package ${basePackage}.controller${packagePath};
 
 import ${basePackage}.model.${objectPackage};
 import ${basePackage}.service.${objectPackage}Service;

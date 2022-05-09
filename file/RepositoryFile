@@ -1,4 +1,4 @@
-package ${basePackage}.repository;
+package ${basePackage}.repository${packagePath};
 
 import ${basePackage}.model.${objectPackage};
 import org.springframework.data.repository.CrudRepository;

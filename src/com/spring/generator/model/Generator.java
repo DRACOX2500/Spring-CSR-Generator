@@ -1,6 +1,6 @@
-package com.spring.generator.util;
+package com.spring.generator.model;
 
-public class Data {
+public class Generator {
 
     public String path;
 

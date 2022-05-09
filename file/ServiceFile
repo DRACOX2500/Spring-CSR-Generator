@@ -1,4 +1,4 @@
-package ${basePackage}.service;
+package ${basePackage}.service${packagePath};
 
 import ${basePackage}.model.${objectPackage};
 import ${basePackage}.repository.${objectPackage}Repository;
