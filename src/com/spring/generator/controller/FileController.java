@@ -53,7 +53,7 @@ public class FileController {
         for (final File fileEntry : folder.listFiles()) {
 
             if (fileEntry.isDirectory() && fileEntry.listFiles().length > 0) {
-                System.out.println("ok");
+
                 listFilesForFolder(folder.getPath() + "\\" + fileEntry.getName(), allFiles);
 
             } else {
@@ -76,7 +76,6 @@ public class FileController {
                 allFiles.add(pathFile);
             }
         }
-        System.out.println(allFiles.size());
 
         return allFiles;
     }
