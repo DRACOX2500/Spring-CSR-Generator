@@ -15,6 +15,17 @@ Use the following dependencies in your project :
 
 # How to use ?
 
+## Method start.bat
+
+Download the [project](https://drive.google.com/file/d/1E7uKv-gKwb-k8MrPsS6ESjVwmKKoN44u/view?usp=sharing) !
+
+1. Execute "start.bat"
+2. Follow instructions...
+
+## Method .jar
+
+Download the [.jar](https://drive.google.com/file/d/1LpOMVVcNrUfGHbtOvv-LYEjQ60u65zKg/view?usp=sharing) !
+
 Keep the .jar in the root folder of this project
 
 1. Open terminal in the same directory where the .jar is located

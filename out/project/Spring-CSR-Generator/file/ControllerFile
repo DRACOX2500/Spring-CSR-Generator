@@ -1,0 +1,84 @@
+package ${basePackage}.controller${packagePath};
+
+import ${basePackage}.model.${objectPackage};
+import ${basePackage}.service.${objectPackage}Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Optional;
+
+@RestController
+public class ${objectName}Controller {
+
+    @Autowired
+    private ${objectName}Service ${lowerObjectName}Service;
+
+    /**
+    	 * Create - Add a new ${lowerObjectName}
+    	 * @param ${lowerObjectName} An object ${lowerObjectName}
+    	 * @return The ${lowerObjectName} object saved
+    	 */
+    	@PostMapping("/${lowerObjectName}")
+    	public ${objectName} create${objectName}(@RequestBody ${objectName} ${lowerObjectName}) {
+    		return ${lowerObjectName}Service.save${objectName}(${lowerObjectName});
+    	}
+
+
+    	/**
+    	 * Read - Get one ${lowerObjectName}
+    	 * @param id The id of the ${lowerObjectName}
+    	 * @return An ${objectName} object full filled
+    	 */
+    	@GetMapping("/${lowerObjectName}/{id}")
+    	public ${objectName} get${objectName}(@PathVariable("id") final Long id) {
+    		Optional<${objectName}> ${lowerObjectName} = ${lowerObjectName}Service.get${objectName}(id);
+    		if(${lowerObjectName}.isPresent()) {
+    			return ${lowerObjectName}.get();
+    		} else {
+    			return null;
+    		}
+    	}
+
+    	/**
+    	 * Read - Get all ${lowerObjectName}s
+    	 * @return - An Iterable object of ${objectName} full filled
+    	 */
+    	@GetMapping("/${lowerObjectName}s")
+    	public Iterable<${objectName}> get${objectName}s() {
+    		return ${lowerObjectName}Service.get${objectName}s();
+    	}
+
+    	/**
+    	 * Update - Update an existing ${lowerObjectName}
+    	 * @param id - The id of the ${lowerObjectName} to update
+    	 * @param ${lowerObjectName} - The ${lowerObjectName} object updated
+    	 * @return
+    	 */
+    	@PutMapping("/${lowerObjectName}/{id}")
+    	public ${objectName} update${objectName}(@PathVariable("id") final Long id, @RequestBody ${objectName} ${lowerObjectName}) {
+    		Optional<${objectName}> e = ${lowerObjectName}Service.get${objectName}(id);
+    		if(e.isPresent()) {
+
+    			// TODO : update function
+    			return ${lowerObjectName};
+    		} else {
+    			return null;
+    		}
+    	}
+
+
+    	/**
+    	 * Delete - Delete an ${lowerObjectName}
+    	 * @param id - The id of the ${lowerObjectName} to delete
+    	 */
+    	@DeleteMapping("/${lowerObjectName}/{id}")
+    	public void delete${objectName}(@PathVariable("id") final Long id) {
+    		${lowerObjectName}Service.delete${objectName}(id);
+    	}
+}

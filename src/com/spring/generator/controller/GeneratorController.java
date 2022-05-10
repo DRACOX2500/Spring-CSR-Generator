@@ -25,7 +25,6 @@ public class GeneratorController {
         // Main project path
         this.gen.path = this.userInput(Question.Q1);
         this.gen.mainPath = this.gen.path.replaceAll("(\\\\|\\/)model","");
-        System.out.println(this.gen.mainPath);
 
         // Base package
         this.gen.basePackage = this.getBasePackage(this.gen.path);
