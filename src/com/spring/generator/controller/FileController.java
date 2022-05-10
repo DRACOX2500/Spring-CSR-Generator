@@ -3,15 +3,9 @@ package com.spring.generator.controller;
 
 import com.spring.generator.model.Files;
 import com.spring.generator.model.Generator;
-import com.sun.istack.internal.NotNull;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
 
 public class FileController {
 
@@ -19,16 +13,10 @@ public class FileController {
 
     private final Files files;
 
-    private final String pathModel;
-
-    private String objectPackage;
-    private String modelName;
-
     public FileController(Generator generator) {
 
         this.gen = generator;
         this.files = new Files();
-        this.pathModel = this.gen.path+"\\model";
     }
 
     public Files getFiles() {
@@ -37,16 +25,16 @@ public class FileController {
 
     public void analyse(){
         this.files.setFilesList(this.listFilesForFolder(
-                this.pathModel,
+                this.gen.path,
                 this.files.getFilesList()
         ));
         System.out.println(this.files.getFilesList().size() + " file(s) found !");
     }
 
-    public ArrayList<String> listFilesForFolder(@NotNull String path, ArrayList<String> allFiles) {
+    public ArrayList<String> listFilesForFolder(String path, ArrayList<String> allFiles) {
 
         File folder = new File(path);
-        if(!folder.exists()){
+        if(!folder.exists() || !folder.isDirectory()){
             return null;
         }
 
@@ -57,7 +45,7 @@ public class FileController {
                 listFilesForFolder(folder.getPath() + "\\" + fileEntry.getName(), allFiles);
 
             } else {
-                String comparedPath = path.replace(this.pathModel,"");
+                String comparedPath = path.replace(this.gen.path,"");
                 String pathFile = "";
 
                 if(comparedPath.length() > 0){

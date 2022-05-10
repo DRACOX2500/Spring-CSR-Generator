@@ -12,6 +12,10 @@ public class TextTool {
                 .replace("${packagePath}", packagePath)
                 .replace("${objectPackage}",objectPackage.replace("\\","."))
                 .replace("${objectName}",modelName)
-                .replace("${lowerObjectName}",modelName.toLowerCase(Locale.ROOT));
+                .replace("${lowerObjectName}",toCamelCase(modelName)); // TODO: camelCase not lowercase
+    }
+
+    public static String toCamelCase(String s) {
+        return String.valueOf(s.charAt(0)).toLowerCase(Locale.ROOT) + s.substring(1);
     }
 }

@@ -2,6 +2,7 @@ package com.spring.generator.controller;
 
 import com.spring.generator.model.Files;
 import com.spring.generator.model.Generator;
+import com.spring.generator.util.Analyser;
 import com.spring.generator.util.CSR;
 import com.spring.generator.util.Question;
 import com.spring.generator.util.TextTool;
@@ -23,10 +24,12 @@ public class GeneratorController {
 
         // Main project path
         this.gen.path = this.userInput(Question.Q1);
+        this.gen.mainPath = this.gen.path.replaceAll("(\\\\|\\/)model","");
+        System.out.println(this.gen.mainPath);
 
         // Base package
-        // TODO : auto
-        this.gen.basePackage = this.userInput(Question.Q2);
+        this.gen.basePackage = this.getBasePackage(this.gen.path);
+        System.out.println("Base Package : " + this.gen.basePackage);
 
         // Generate Question CSR
         this.gen.setCreateController(this.userInput(Question.Q3));
@@ -42,12 +45,48 @@ public class GeneratorController {
         return scan.nextLine();
     }
 
+    public String getBasePackage(String path) {
+        File modelPack = new File(path);
+        String pack = "";
+
+        // Method 1 : try to get base package from first model
+        for(File file : modelPack.listFiles()){
+            pack = findPack(pack, file);
+        }
+
+        // Method 2 : try to get base package from Main file
+        if(pack.equals("")){
+            File[] mainDirectory = modelPack.getParentFile().listFiles();
+            for(File file : mainDirectory){
+                pack = findPack(pack, file);
+            }
+        }
+
+
+        return pack;
+    }
+
+    private String findPack(String pack, File file) {
+        if(file.isFile()){
+            pack = Analyser.searchInFile(file, "package ([a-z0-9]*\\.?)+;");
+            if(!pack.equals("")){
+                pack = pack.replace("package ","");
+                pack = pack.substring(0, pack.length()-1);
+                pack = pack.replaceAll("\\.model(\\..*)*","");
+            }
+        }
+        return pack;
+    }
+
     public void generate(Files files){
 
         if(this.gen.isCreateRepo()){
 
             if(this.generateCSR(CSR.Type.REPOSITORY,files)){
                 System.out.println(CSR.Type.REPOSITORY + "(ies) created !");
+            }
+            else {
+                System.out.println(CSR.Type.REPOSITORY + "(ies) generation failed  !");
             }
         }
 
@@ -56,12 +95,18 @@ public class GeneratorController {
             if(this.generateCSR(CSR.Type.SERVICE,files)){
                 System.out.println(CSR.Type.SERVICE + "(s) created !");
             }
+            else {
+                System.out.println(CSR.Type.SERVICE + "(ies) generation failed  !");
+            }
         }
 
         if(this.gen.isCreateController()){
 
             if(this.generateCSR(CSR.Type.CONTROLLER,files)){
-                System.out.println(CSR.Type.SERVICE + "(s) created !");
+                System.out.println(CSR.Type.CONTROLLER + "(s) created !");
+            }
+            else {
+                System.out.println(CSR.Type.CONTROLLER + "(ies) generation failed  !");
             }
         }
     }
@@ -82,7 +127,7 @@ public class GeneratorController {
             String packagePath = FileController.getPackage(s);
             String modelName = s[s.length-1];
 
-            String absPath = this.gen.path + "\\" + type.toLowerCase(Locale.ROOT) + "\\" + csrPath;
+            String absPath = this.gen.mainPath + "\\" + type.toLowerCase(Locale.ROOT) + "\\" + csrPath;
 
             File csrFile = new File(absPath);
             File directory = new File(

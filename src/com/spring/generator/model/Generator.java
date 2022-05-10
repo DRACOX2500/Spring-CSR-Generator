@@ -4,6 +4,8 @@ public class Generator {
 
     public String path;
 
+    public String mainPath;
+
     public String basePackage;
 
     private boolean createController;
