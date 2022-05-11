@@ -5,6 +5,13 @@
 Controller, Service, Repository Generator for Spring project
 
 # Requirement
+
+## Your system
+![](https://img.shields.io/badge/Java_SE-8+-success?logo=java&logoColor=white)
+
+Please have at least [Java 8](https://www.java.com/en/download/manual.jsp) or newer !
+
+## Your project
 ![](https://img.shields.io/badge/Spring-0?logo=spring&logoColor=white)
 
 Only for [Spring Boot](https://spring.io/projects/spring-boot) project
@@ -24,19 +31,28 @@ Download the [project](https://drive.google.com/file/d/1E7uKv-gKwb-k8MrPsS6ESjVw
 
 ## Method .jar
 
-Download the [.jar](https://drive.google.com/file/d/1LpOMVVcNrUfGHbtOvv-LYEjQ60u65zKg/view?usp=sharing) !
-
-Keep the .jar in the root folder of this project
-
-1. Open terminal in the same directory where the .jar is located
-
-2. Use the following command to start the program :
+1. Download the [.jar](https://drive.google.com/file/d/1LpOMVVcNrUfGHbtOvv-LYEjQ60u65zKg/view?usp=sharing) and clone the project
+2. Keep the .jar in the root folder of this project
+3. Open terminal in the same directory where the .jar is located
+4. Use the following command to start the program :
 `java -jar Spring-CSR-Generator.jar`
-3. Follow instructions...
+5. Follow instructions...
 
 Normally controllers, services and repositories will be generated...
 
 # Versions
+## Version 0.4 beta
+
+Downgrade Java version to compile and use the project
+
+Optimize ControllerFile
+
+Have the choice to overwrite existing files or not
+
+Fix bug :
+- The questions did not correspond to the correct generator functions
+- CSR files were always overwritten
+- The .bat crash in case of Java version error
 
 ## Version 0.3 beta
 

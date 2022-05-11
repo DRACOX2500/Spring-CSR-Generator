@@ -14,6 +14,8 @@ public class Generator {
 
     private boolean createRepo;
 
+    private boolean overwriteFiles;
+
     public void setCreateController(final String s) {
         this.createController = s.equals("y");
     }
@@ -36,5 +38,13 @@ public class Generator {
 
     public boolean isCreateRepo() {
         return createRepo;
+    }
+
+    public void setOverwriteFiles(final String s) {
+        this.overwriteFiles = s.equals("y");
+    }
+
+    public boolean isOverwriteFiles() {
+        return overwriteFiles;
     }
 }

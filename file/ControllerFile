@@ -38,11 +38,7 @@ public class ${objectName}Controller {
     	@GetMapping("/${lowerObjectName}/{id}")
     	public ${objectName} get${objectName}(@PathVariable("id") final Long id) {
     		Optional<${objectName}> ${lowerObjectName} = ${lowerObjectName}Service.get${objectName}(id);
-    		if(${lowerObjectName}.isPresent()) {
-    			return ${lowerObjectName}.get();
-    		} else {
-    			return null;
-    		}
+    		return ${lowerObjectName}.orElse(null);
     	}
 
     	/**

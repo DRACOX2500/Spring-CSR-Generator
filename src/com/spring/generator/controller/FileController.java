@@ -28,7 +28,7 @@ public class FileController {
                 this.gen.path,
                 this.files.getFilesList()
         ));
-        System.out.println(this.files.getFilesList().size() + " file(s) found !");
+        System.out.println(this.files.getFilesList().size() + " model file(s) found !");
     }
 
     public ArrayList<String> listFilesForFolder(String path, ArrayList<String> allFiles) {
