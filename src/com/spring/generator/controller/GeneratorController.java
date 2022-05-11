@@ -2,15 +2,15 @@ package com.spring.generator.controller;
 
 import com.spring.generator.model.Files;
 import com.spring.generator.model.Generator;
-import com.spring.generator.util.Analyser;
-import com.spring.generator.util.CSR;
-import com.spring.generator.util.Question;
-import com.spring.generator.util.TextTool;
+import com.spring.generator.utils.Analyser;
+import com.spring.generator.utils.CSR;
+import com.spring.generator.utils.Question;
+import com.spring.generator.utils.TextTool;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -31,9 +31,10 @@ public class GeneratorController {
         System.out.println("Base Package : " + this.gen.basePackage);
 
         // Generate Question CSR
-        this.gen.setCreateController(this.userInput(Question.Q3));
+        this.gen.setCreateRepo(this.userInput(Question.Q3));
         this.gen.setCreateService(this.userInput(Question.Q4));
-        this.gen.setCreateRepo(this.userInput(Question.Q5));
+        this.gen.setCreateController(this.userInput(Question.Q5));
+        this.gen.setOverwriteFiles(this.userInput(Question.Q6));
     }
 
     private String userInput(String question){
@@ -136,35 +137,36 @@ public class GeneratorController {
                     )
             );
 
-            // Create file
-            if (!directory.exists()) {
+            // 1. Create file
+            if (!directory.getAbsoluteFile().exists()) {
                 directory.mkdirs();
-                if (!csrFile.exists()) {
-                    csrFile.getParentFile().mkdir();
+            }
+            if (!csrFile.getAbsoluteFile().exists() || this.gen.isOverwriteFiles()) {
+                csrFile.getParentFile().mkdir();
+                try {
+                    csrFile.createNewFile();
+
+                    // 2. Write file
                     try {
-                        csrFile.createNewFile();
-                    }catch (IOException ioe){
-                        ioe.printStackTrace();
+                        Scanner scanner = new Scanner( new File("./file/"+type+"File") );
+                        String content = scanner.useDelimiter("\\A").next();
+                        scanner.close();
+
+                        content = TextTool.changeVariable(content,gen,packagePath,objPackage,modelName);
+
+                        FileWriter fw = new FileWriter(absPath);
+                        fw.write(content);
+                        fw.close();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                         return false;
                     }
+
+                }catch (IOException ioe){
+                    ioe.printStackTrace();
+                    return false;
                 }
-            }
-
-            // Write file
-            try {
-                Scanner scanner = new Scanner( new File("./file/"+type+"File") );
-                String content = scanner.useDelimiter("\\A").next();
-                scanner.close();
-
-                content = TextTool.changeVariable(content,gen,packagePath,objPackage,modelName);
-
-                FileWriter fw = new FileWriter(absPath);
-                fw.write(content);
-                fw.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
             }
 
         }

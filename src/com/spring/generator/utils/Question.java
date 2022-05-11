@@ -1,4 +1,4 @@
-package com.spring.generator.util;
+package com.spring.generator.utils;
 
 public class Question {
 
@@ -7,5 +7,6 @@ public class Question {
     public static final String Q3 = "Create Repositories ?(y/n) :";
     public static final String Q4 = "Create Services ?(y/n) :";
     public static final String Q5 = "Create Controllers ?(y/n) :";
+    public static final String Q6 = "Do you want to overwrite existing files? ?(y/n) :";
 
 }

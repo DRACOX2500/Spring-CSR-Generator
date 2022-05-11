@@ -1,4 +1,4 @@
-package com.spring.generator.util;
+package com.spring.generator.utils;
 
 public class CSR {
 
