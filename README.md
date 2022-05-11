@@ -45,7 +45,7 @@ Normally controllers, services and repositories will be generated...
 
 Downgrade Java version to compile and use the project
 
-Optimise ControllerFile
+Optimize ControllerFile
 
 Have the choice to overwrite existing files or not
 
